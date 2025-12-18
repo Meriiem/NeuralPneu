@@ -34,7 +34,7 @@ function runCompletePipeline(varargin)
     % Parse arguments
     if nargin > 0 && strcmpi(varargin{1}, 'quick')
         config.skipSimulink = true;
-        fprintf('⚡ Quick mode: Skipping Simulink simulation\n\n');
+        fprintf(' Quick mode: Skipping Simulink simulation\n\n');
     end
     
     %% ===== PRE-FLIGHT CHECKS =====
@@ -359,7 +359,8 @@ function runCompletePipeline(varargin)
     fprintf('\n');
     
     fprintf('╔══════════════════════════════════════════════════════════╗\n');
-    fprintf('║                 🎉 ALL DONE! GOOD LUCK! 🎉               ║\n');
+    fprintf('║                  ALL DONE!               ║\n');
     fprintf('╚══════════════════════════════════════════════════════════╝\n');
     fprintf('\n');
 end
+
