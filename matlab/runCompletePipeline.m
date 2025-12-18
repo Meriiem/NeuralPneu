@@ -14,6 +14,7 @@ function runCompletePipeline(varargin)
 %       runCompletePipeline('quick')    % Skip Simulink simulation
 
     clc;
+
     
     fprintf('\n');
     fprintf('╔══════════════════════════════════════════════════════════╗\n');
@@ -363,4 +364,5 @@ function runCompletePipeline(varargin)
     fprintf('╚══════════════════════════════════════════════════════════╝\n');
     fprintf('\n');
 end
+
 
