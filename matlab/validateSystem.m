@@ -7,7 +7,6 @@ function validateSystem()
 %   - Performance benchmarking
 %   - Cross-validation analysis
 %   - Robustness testing
-%   - Visualization quality checks
 %
 %   Run this before final submission to ensure everything works correctly
 
@@ -459,3 +458,4 @@ function validateSystem()
     save('validation_report.mat', 'testResults', '-v7.3');
     fprintf('✓ Validation report saved to: validation_report.mat\n\n');
 end
+
