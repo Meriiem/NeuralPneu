@@ -8,7 +8,6 @@ function validateSystem()
 %   - Cross-validation analysis
 %   - Robustness testing
 %
-%   Run this before final submission to ensure everything works correctly
 
     fprintf('\n');
     fprintf('╔════════════════════════════════════════╗\n');
@@ -458,4 +457,5 @@ function validateSystem()
     save('validation_report.mat', 'testResults', '-v7.3');
     fprintf('✓ Validation report saved to: validation_report.mat\n\n');
 end
+
 
