@@ -2,14 +2,14 @@
 
 <div align="center">
 
-![NeuralPneu Banner](https://img.shields.io/badge/MATLAB-Simulink%20Student%20Challenge%202025-orange?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
-![Accuracy](https://img.shields.io/badge/Classification%20Accuracy-98.75%25-success?style=for-the-badge)
-![MATLAB](https://img.shields.io/badge/MATLAB-R2020b+-red?style=for-the-badge&logo=mathworks)
+[![MATLAB Simulink Student Challenge 2025](https://img.shields.io/badge/MATLAB-Simulink%20Student%20Challenge%202025-orange?style=for-the-badge)](https://www.mathworks.com/academia/student-challenge.html)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+[![Accuracy](https://img.shields.io/badge/Classification%20Accuracy-98.75%25-success?style=for-the-badge)](#performance-metrics)
+[![MATLAB](https://img.shields.io/badge/MATLAB-R2020b+-red?style=for-the-badge&logo=mathworks)](#installation--requirements)
 
 **A High-Fidelity Digital Twin Solution for Predictive Maintenance**
 
-[Video Demo](#video-demonstration) • [Results](#performance-metrics) • [Quick Start](#quick-start) • [📖 Documentation](#documentation) • [🏆 Challenge](#simulink-student-challenge-2025)
+[Results](#performance-metrics) • [Quick Start](#quick-start) • [Documentation](#documentation)
 
 ---
 
@@ -18,7 +18,7 @@
 **Meriem Aoudia**  
 Master of Science in Machine Learning  
 **American University of Sharjah (AUS)**  
-🔗 [LinkedIn](https://www.linkedin.com/in/meriem-aoudia/) 
+[LinkedIn](https://www.linkedin.com/in/meriem-aoudia/)  
 *Submitted for the MATLAB Simulink Student Challenge 2025*
 
 ---
@@ -35,91 +35,64 @@ The core breakthrough is the **residual signal** methodology: by running a real 
 
 ### Highlights
 
-- **Industrial-Grade Simulation**: 4th-order Runge-Kutta integration with realistic sensor modeling
-- **Advanced Deep Learning**: 16-layer Bidirectional LSTM architecture with batch normalization
-- **Comprehensive Dataset**: 1,600 balanced samples across 8 fault classes with diverse operating conditions
-- **Exceptional Accuracy**: 98.75% validated test accuracy with >97% precision/recall per class
-- **Full Integration**: Seamless Simulink + MATLAB + Deep Learning Toolbox workflow
-- **Physics-Informed AI**: First-principles ODE modeling ensures synthetic data reflects real-world physics
-- **Production-Ready**: Complete validation suite, error handling, and deployment documentation
+- **Exceptional Accuracy**: 98.75% validated test accuracy with >97% precision/recall per class.
+- **Physics-Informed AI**: First-principles ODE modeling ensures synthetic data reflects real-world physics.
+- **Advanced Deep Learning**: 16-layer Bidirectional LSTM architecture for time-series classification.
+- **Comprehensive Dataset**: 1,600 balanced samples across 8 fault classes with diverse operating conditions.
 
 ---
 
-##  System Architecture
+## System Architecture
+
+The system is built around the digital twin concept to generate the critical residual signal for fault classification.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    NeuralPneu Architecture                       │
+│                    NeuralPneu Architecture                       │
 └─────────────────────────────────────────────────────────────────┘
 
-                    ┌──────────────────┐
-                    │  Valve Command   │
-                    │    (Input u)     │
-                    └────────┬─────────┘
-                             │
-              ┌──────────────┴──────────────┐
-              │                             │
-      ┌───────▼───────┐            ┌────────▼────────┐
-      │  Real Plant   │            │  Digital Twin   │
-      │  (with faults)│            │  (ideal model)  │
-      └───────┬───────┘            └────────┬────────┘
-              │                             │
-              │ P_measured                  │ P_twin
-              │                             │
-              └──────────────┬──────────────┘
-                             │
-                    ┌────────▼────────┐
-                    │ Residual Signal │
-                    │ P_meas - P_twin │
-                    └────────┬────────┘
-                             │
-                  ┌──────────▼──────────┐
-                  │  Feature Engineer   │
-                  │  (7D time series)   │
-                  └──────────┬──────────┘
-                             │
-                  ┌──────────▼──────────┐
-                  │  Bi-LSTM Classifier │
-                  │    (16 layers)      │
-                  └──────────┬──────────┘
-                             │
-                  ┌──────────▼──────────┐
-                  │  Fault Prediction   │
-                  │   (8 classes)       │
-                  └─────────────────────┘
+                    ┌──────────────────┐
+                    │  Valve Command   │
+                    │    (Input u)     │
+                    └────────┬─────────┘
+                             │
+              ┌──────────────┴──────────────┐
+              │                             │
+      ┌───────▼───────┐            ┌────────▼────────┐
+      │  Real Plant   │            │  Digital Twin   │
+      │  (with faults)│            │  (ideal model)  │
+      └───────┬───────┘            └────────┬────────┘
+              │                             │
+              │ P_measured                  │ P_twin
+              │                             │
+              └──────────────┬──────────────┘
+                             │
+                    ┌────────▼────────┐
+                    │ Residual Signal │
+                    │ P_meas - P_twin │
+                    └────────┬────────┘
+                             │
+                  ┌──────────▼──────────┐
+                  │  Feature Engineer   │
+                  │  (7D time series)   │
+                  └──────────┬──────────┘
+                             │
+                  ┌──────────▼──────────┐
+                  │  Bi-LSTM Classifier │
+                  │    (16 layers)      │
+                  └──────────┬──────────┘
+                             │
+                  ┌──────────▼──────────┐
+                  │  Fault Prediction   │
+                  │   (8 classes)       │
+                  └─────────────────────┘
 ```
-
-### Core Components
-
-1. **Physics Simulation Engine** (`generatePneumaticDataset.m`)
-   - 4th-order Runge-Kutta ODE solver
-   - Realistic sensor noise (σ = 800 Pa) and ADC quantization (100 Pa)
-   - Parameter variation (±10% across dataset)
-   - Multiple valve command profiles (step, ramp, sine, mixed)
-
-2. **Digital Twin Model** (`PneumaticDigitalTwin.slx`)
-   - Parallel real/ideal plant simulation
-   - Residual signal computation
-   - Real-time data logging
-   - Configurable fault injection
-
-3. **Deep Learning Pipeline** (`trainFaultClassifier.m`)
-   - Bidirectional LSTM architecture (128 → 64 units)
-   - Z-score normalization with per-feature statistics
-   - Data augmentation (20% jittered samples)
-   - Comprehensive evaluation (ROC curves, confusion matrix, feature importance)
-
-4. **Integration Framework** (`runDigitalTwinSimulation.m`)
-   - Automated Simulink execution
-   - Real-time fault classification
-   - Visualization dashboard generation
-   - Performance analysis and reporting
 
 ---
 
-##  Fault Taxonomy
+## Fault Taxonomy
 
-The system classifies **8 distinct fault types** with high fidelity:
+The system classifies **8 distinct fault types** with high fidelity, generated via the Simulink Digital Twin model:
 
 | Category | Fault Type | Configuration | Typical Signature |
 |----------|-----------|---------------|-------------------|
@@ -133,30 +106,27 @@ The system classifies **8 distinct fault types** with high fidelity:
 | **Sensor** | Negative Bias | P_meas = P_real - 35 kPa | Constant negative offset |
 
 **Dataset Composition:**
-- Total samples: 1,600
-- Samples per class: 200 (balanced)
+- Total samples: 1,600 (200 per class, balanced)
 - Simulation time: 20 seconds @ 50 Hz
 - Feature window: 400 time steps (8 seconds)
 - Train/Val/Test split: 70/15/15
 
 ---
 
-##  Performance Metrics
+## Performance Metrics
 
 ### Overall Results
 
-```
-╔══════════════════════════════════════════╗
-║   Test Accuracy: 98.75%                  ║
-║   Macro F1-Score: 0.987                  ║
-║   Training Time: ~15 minutes             ║
-╚══════════════════════════════════════════╝
-```
+| Metric | Value |
+|:---|:---|
+| **Test Accuracy** | **98.75%** |
+| Macro F1-Score | 0.987 |
+| Training Time | ~15 minutes |
 
 ### Per-Class Performance
 
 | Fault Class | Precision | Recall | F1-Score | Support |
-|------------|-----------|--------|----------|---------|
+|:------------|:-----------|:--------|:----------|:---------|
 | Normal | 99.0% | 99.5% | 99.2% | 30 |
 | Leak Small | 97.5% | 98.0% | 97.7% | 30 |
 | Leak Large | 99.0% | 98.5% | 98.7% | 30 |
@@ -167,30 +137,20 @@ The system classifies **8 distinct fault types** with high fidelity:
 | Sensor Bias (-) | 98.0% | 98.5% | 98.2% | 30 |
 
 **Key Insights:**
--  All classes exceed 97% precision and recall
--  Minimal confusion between fault types
--  Validation accuracy tracks training (excellent generalization)
--  Robust to sensor noise and parameter variation
+- All classes exceed 97% precision and recall, demonstrating robust classification.
+- Minimal confusion between fault types, indicating the residual signal is a highly discriminative feature.
+- Excellent generalization to the test set, confirming the model's robustness to sensor noise and parameter variation.
 
 ---
 
-##  Installation & Requirements
+## Installation & Requirements
 
 ### Prerequisites
 
 - **MATLAB R2020b or later** (R2023b recommended)
 - **Required Toolboxes:**
-  - Simulink
-  - Deep Learning Toolbox
-- **Optional (for enhanced features):**
-  - Statistics and Machine Learning Toolbox
-  - Simulink Dashboard Blocks
-
-### System Requirements
-
-- **RAM:** 8 GB minimum (16 GB recommended)
-- **Storage:** 2 GB free space
-- **GPU:** Optional (CUDA-compatible for faster training)
+    - Simulink
+    - Deep Learning Toolbox
 
 ### Installation
 
@@ -205,7 +165,7 @@ cd matlab
 
 ---
 
-##  Quick Start
+## Quick Start
 
 ### Automated Pipeline (Recommended)
 
@@ -218,11 +178,10 @@ cd matlab
 % Run the complete automated pipeline
 runCompletePipeline()
 
-% This will:
-% 1. Generate dataset (~5-10 minutes)
-% 2. Train classifier (~10-20 minutes)
-% 3. Validate system
-% 4. Generate all visualizations
+% This script will:
+% 1. Generate the synthetic dataset (~5-10 minutes)
+% 2. Train the Bi-LSTM classifier (~10-20 minutes)
+% 3. Validate the system and generate all visualizations
 ```
 
 ### Manual Execution
@@ -232,7 +191,7 @@ For step-by-step control:
 ```matlab
 % Step 1: Generate synthetic dataset
 generatePneumaticDataset()
-% Output: pneumatic_dataset.mat (1,600 samples)
+% Output: pneumatic_dataset.mat
 
 % Step 2: Train deep learning classifier
 trainFaultClassifier()
@@ -241,73 +200,34 @@ trainFaultClassifier()
 % Step 3: Validate system
 validateSystem()
 % Output: validation_report.mat
-
-% Step 4: Run Simulink simulations (requires model creation)
-runDigitalTwinSimulation()
-% Output: simulation_results.mat, visualizations
-```
-
-### Testing Individual Fault Scenarios
-
-```matlab
-% Load trained model
-load('pneumatic_fault_lstm.mat', 'net', 'normParams');
-assignin('base', 'net', net);
-assignin('base', 'normParams', normParams);
-
-% Set fault type (0-7)
-faultId = uint8(2);  % Large leak
-
-% Run Simulink model
-sim('PneumaticDigitalTwin');
-
-% Visualize results
-figure;
-plot(P_meas_log, 'b-', 'LineWidth', 1.5); hold on;
-plot(P_twin_log, 'g--', 'LineWidth', 1.5);
-legend('Measured', 'Digital Twin');
-xlabel('Time Step'); ylabel('Pressure (Pa)');
-title('Pneumatic System Response');
 ```
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```
 NeuralPneu/
 │
-├── README.md                          # This file
-├── LICENSE                            # MIT License
+├── README.md                          # This file
+├── LICENSE                            # MIT License
 │
-├── matlab/                            # MATLAB source code
-│   ├── generatePneumaticDataset.m     # Dataset generation (1,600 samples)
-│   ├── trainFaultClassifier.m         # Deep learning training
-│   ├── runDigitalTwinSimulation.m     # Full system integration
-│   ├── validateSystem.m               # Comprehensive validation
-│   ├── runCompletePipeline.m          # Automated workflow
-│   │
-│   ├── pneumatic_dataset.mat          # Generated dataset (run to create)
-│   ├── pneumatic_fault_lstm.mat       # Trained model (run to create)
-│   └── validation_report.mat          # System validation results
+├── matlab/                            # MATLAB source code and scripts
+│   ├── generatePneumaticDataset.m     # Dataset generation
+│   ├── trainFaultClassifier.m         # Deep learning training
+│   ├── runCompletePipeline.m          # Automated workflow
+│   └── ...
 │
-├── models/                            # Simulink models
-│   └── PneumaticDigitalTwin.slx       # Main digital twin model
+├── models/                            # Simulink models
+│   └── PneumaticDigitalTwin.slx       # Main digital twin model
 │
-└── results/                           # Generated outputs
-│   ├── confusion_matrix.png           # Classification confusion matrix
-│   ├── roc_curves.png                 # ROC curves per class
-│   ├── feature_importance.png         # Feature importance analysis
-│   ├── simulation_dashboard.png       # Multi-scenario visualization
-│   ├── simulation_results.mat         # Complete simulation data
-    └── individual_scenarios/          # Per-fault detailed plots
+└── results/                           # Generated outputs (plots, reports)
+```
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
----
 
 *Last Updated: December 2025*
