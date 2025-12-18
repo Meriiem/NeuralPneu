@@ -427,33 +427,6 @@ Softmax → Classification (8 classes)
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
-```
-MIT License
-
-Copyright (c) 2025 Meriem Aoudia
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
----
-<div>
-
-**Built with ❤️ using MATLAB & Simulink**
-
-![MATLAB](https://img.shields.io/badge/MATLAB-R2023b-orange?style=flat-square&logo=mathworks)
-![Simulink](https://img.shields.io/badge/Simulink-Enabled-blue?style=flat-square)
-![Deep Learning](https://img.shields.io/badge/Deep%20Learning-LSTM-green?style=flat-square)
-
-**Simulink Student Challenge 2025**
-
-[Challenge Website](https://www.mathworks.com/academia/students/competitions/student-challenge/simulink-student-challenge.html)
-
-</div>
-
 ---
 
 *Last Updated: December 2024*
