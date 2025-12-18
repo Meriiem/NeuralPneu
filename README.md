@@ -45,24 +45,6 @@ The core breakthrough is the **residual signal** methodology: by running a real 
 
 ---
 
-## 📋 Table of Contents
-
-- [System Architecture](#system-architecture)
-- [Fault Taxonomy](#fault-taxonomy)
-- [Performance Metrics](#performance-metrics)
-- [Installation & Requirements](#installation--requirements)
-- [Quick Start](#quick-start)
-- [Project Structure](#project-structure)
-- [Technical Details](#technical-details)
-- [Video Demonstration](#video-demonstration)
-- [Results & Visualizations](#results--visualizations)
-- [Future Work](#future-work)
-- [Citation](#citation)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
-
----
-
 ##  System Architecture
 
 ```
@@ -320,107 +302,6 @@ NeuralPneu/
 │   ├── simulation_results.mat         # Complete simulation data
     └── individual_scenarios/          # Per-fault detailed plots
 
-```
-
----
-
-##  Technical Details
-
-### Physics Modeling
-
-The pneumatic system is governed by a first-order ODE derived from conservation of mass:
-
-```
-dP/dt = (1/C) * [Q_in - Q_leak]
-
-where:
-  Q_in = (P_supply - P) / R_in(u)    [Inlet flow]
-  Q_leak = P / R_leak                [Leak flow]
-```
-
-**Parameters:**
-- Supply pressure: P_s = 7.0 × 10⁵ Pa (7 bar gauge)
-- Volume capacitance: C = 1.5 × 10⁻⁹ m³/Pa
-- Nominal inlet resistance: R_in = 5.0 × 10⁵ Pa·s/m³
-- Nominal leak resistance: R_leak = 3.0 × 10⁶ Pa·s/m³
-
-**Numerical Method:**
-- 4th-order Runge-Kutta (RK4) integration
-- Time step: Ts = 0.02 s (50 Hz)
-- Physics sub-stepping: 20 substeps per Ts for stability
-
-### Feature Engineering
-
-Seven features form the input sequence (400 time steps):
-
-1. **P_measured**: Raw pressure measurement [Pa]
-2. **P_twin**: Digital twin pressure estimate [Pa]
-3. **Residual**: P_measured - P_twin [Pa]  **Key innovation**
-4. **u**: Valve command [dimensionless, 0-1]
-5. **dP/dt_measured**: Measured pressure derivative [Pa/s]
-6. **dP/dt_twin**: Twin pressure derivative [Pa/s]
-7. **Residual_MA**: Moving average of residual (window=20) [Pa]
-
-**Preprocessing:**
-- Z-score normalization per feature
-- Gaussian smoothing (σ=10) before differentiation
-- Window selection: last 8 seconds (steady-state region)
-
-### Neural Network Architecture
-
-**16-Layer Bidirectional LSTM Classifier:**
-
-```
-Input (7 features) 
-    ↓
-Bi-LSTM (128 units, sequence mode)
-    ↓
-Batch Normalization + Dropout (30%)
-    ↓
-Bi-LSTM (64 units, last output)
-    ↓
-Dropout (30%)
-    ↓
-Fully Connected (128 neurons)
-    ↓
-Batch Normalization + ReLU + Dropout (40%)
-    ↓
-Fully Connected (64 neurons)
-    ↓
-Batch Normalization + ReLU
-    ↓
-Fully Connected (8 neurons)
-    ↓
-Softmax → Classification (8 classes)
-```
-
-**Training Configuration:**
-- Optimizer: Adam
-- Learning rate: 1e-3 with piecewise decay (50% every 20 epochs)
-- Batch size: 32
-- Max epochs: 60 (early stopping at validation patience = 10)
-- L2 regularization: 1e-4
-- Gradient clipping: threshold = 1.0
-
----
-
-## Video Demonstration
-
-**🔗 [Watch Full Video on YouTube](YOUR_YOUTUBE_LINK_HERE)**
-
-[![NeuralPneu Demo](https://img.shields.io/badge/▶️%20Watch%20Video-YouTube-red?style=for-the-badge&logo=youtube)](YOUR_YOUTUBE_LINK_HERE)
-
-**Video Highlights:**
-- 0:00 - Teaser: Live fault detection
-- 0:25 - Problem statement & industrial context
-- 1:25 - System architecture walkthrough
-- 2:30 - Feature engineering deep dive
-- 3:15 - Training performance & results
-- 3:45 - Live Simulink demonstration
-- 4:20 - Conclusion & impact
-
-**Challenge Tag:** `#SimulinkStudentChallenge2025`
-
 ---
 
 ## 📜 License
@@ -429,4 +310,4 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ---
 
-*Last Updated: December 2024*
+*Last Updated: December 2025*
