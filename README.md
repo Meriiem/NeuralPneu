@@ -219,9 +219,7 @@ NeuralPneu/
 │   └── ...
 │
 ├── models/                            # Simulink models
-│   └── PneumaticDigitalTwin.slx       # Main digital twin model
-│
-└── results/                           # Generated outputs (plots, reports)
+    └── PneumaticDigitalTwin.slx       # Main digital twin model
 ```
 
 ---
