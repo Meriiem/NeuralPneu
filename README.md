@@ -440,6 +440,7 @@ copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
 ---
+<div>
 
 **Built with ❤️ using MATLAB & Simulink**
 
